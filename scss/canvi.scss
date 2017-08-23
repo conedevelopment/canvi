@@ -1,0 +1,328 @@
+/*
+ * Variables
+ */
+
+$canvi-transition-time: 0.3s !default;
+$canvi-easing: cubic-bezier(0.420, 0.000, 0.580, 1.000) !default;
+
+
+/*
+ * Default Styles
+ */
+
+body.is-canvi-ready {
+    overflow-x: hidden;
+}
+
+body.is-canvi-ready .canvi-navbar {
+    display: block;
+    visibility: visible;
+}
+
+.canvi-navbar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    background: #fff;
+    width: 280px;
+    display: none;
+    visibility: hidden;
+    transition: transform $canvi-transition-time $canvi-easing;
+    will-change: transform;
+    -webkit-overflow-scrolling: touch;
+    // overflow-x: hidden;
+    // overflow-y: scroll;
+    overflow: auto;
+    
+    
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #efefef;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #ddd;
+        border-radius: 2px;
+    }
+    
+    &.is-canvi-open {
+        transition: transform $canvi-transition-time $canvi-easing;
+        will-change: transform;
+    }
+    
+    &[data-position="right"] {
+        right: 0;
+        transform: translate3d(100%, 0, 0);
+        
+        &[data-push-content="true"] {
+            transform: translate3d(0, 0, 0);
+        }
+        
+        &.is-canvi-open {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    
+    &[data-position="left"] {
+        left: 0;
+        transform: translate3d(-100%, 0, 0);
+        
+        &[data-push-content="true"] {
+            transform: translate3d(0, 0, 0);
+        }
+        
+        &.is-canvi-open {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+    
+    &[data-push-content="false"] {
+        z-index: 10;
+    }
+    
+    &[data-push-content="true"] {
+        z-index: 1;
+    }
+    
+}
+
+.canvi-content {
+    position: relative;
+    z-index: 5;
+    transition: transform $canvi-transition-time $canvi-easing;
+    overflow: hidden;
+    background: #fff;
+    
+    &.is-canvi-open {
+        transition: transform $canvi-transition-time $canvi-easing;
+    }
+}
+
+.canvi-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1031;
+}
+
+.canvi-content.is-canvi-open .canvi-overlay {
+    visibility: visible;
+    animation-name: canvi-animate-in;
+	animation-duration: $canvi-transition-time;
+	animation-fill-mode: forwards;
+    animation-timing-function: $canvi-easing;
+    backface-visibility: hidden;
+}
+
+.canvi-content.is-canvi-open .canvi-overlay.canvi-animate-out {
+    animation-name: canvi-animate-out;
+	animation-duration: $canvi-transition-time;
+	animation-fill-mode: forwards;
+    animation-timing-function: $canvi-easing;
+    backface-visibility: hidden;
+}
+
+
+/*
+ * User Info Styling
+ */
+
+.canvi-user-info {
+    padding: 25px 30px;
+    display: flex;
+    align-items: center;
+    justify-cnt: left;
+    background: #333739;
+    margin-bottom: 20px;
+    position: relative;
+    
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    &__image {
+        margin-right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+    
+    }
+    
+    &__data {
+        width: calc(100% - 70px);
+    }
+    
+    &__title {
+        font-weight: 700;
+        color: #fff;
+        font-size: 18px;
+        margin: 0 0 3px 0;
+        line-height: 1.3em;
+        display: block;
+    }
+    
+    &__meta {
+        display: inline-block;
+        color: rgba(255,255,255,0.7);
+        text-decoration: none;
+        font-size: 14px;
+        
+ t:    &:hover,
+        &:focus,
+        &:active {
+            color: rgba(255,255,255,0.9);
+        }
+    }
+    
+    &__close {
+        position: absolute;
+        top: calc(50% - 20px);
+        right: 30px;
+        background: rgba(0,0,0,0.2);
+        width: 40px;
+        height: 40px;
+        border-radius: 2px;
+        transition: 0.3s;
+        cursor: pointer;
+        user-select: none;
+        
+        &:hover {
+            background: rgba(0,0,0,0.6);
+        }
+        
+        &::before {
+            content: '';
+            width: 20px;
+            height: 3px;
+            background: #fff;
+            position: absolute;
+            top: 18px;
+            left: 10px;
+            transform: rotate(45deg);
+        }
+        
+        &::after {
+            content: '';
+            width: 20px;
+            height: 3px;
+            background: #fff;
+            position: absolute;
+            top: 18px;
+            right: 10px;
+            transform: rotate(-45deg);
+        }
+    }
+}
+
+
+/*
+ * Navigation styling
+ */
+
+.canvi-navigation {
+    margin: 0;
+    padding: 0;
+    
+    li {
+        list-style: none;
+        
+        &:not(:last-child) {
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+    }
+    
+    &__item {
+        display: block;
+        padding: 14px 30px;
+        display: flex;
+        align-items: center;
+        opacity: 0.7;
+        text-decoration: none;
+        
+        &.is-active,
+        &:hover {
+            opacity: 1;
+        }
+    }
+    
+    &__icon-wrapper {
+        margin-right: 20px;
+        width: 30px;
+        height: 30px;
+        border-radius: 3px;
+        background: #aaa;
+        color: #fff;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    &__icon {
+        font-size: 17px;
+        line-height: 1em;
+    }
+    
+    &__text {
+        font-weight: 700;
+        color: #94a0a8;
+        font-size: 14px;
+        margin: 0;
+        line-height: 1.3em;
+        display: block;
+        text-transform: uppercase;
+    }
+}
+
+
+
+/*
+ * Navigation header
+ */
+
+.canvi-header {
+    background: #1ce678;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &__image {
+        margin: 30px;
+        max-width: 100px;
+        height: auto;
+    }
+}
+
+
+/*
+ * Keyframe animations
+ */
+
+@keyframes canvi-animate-in {
+    0%   {
+    	opacity: 0;
+    }
+    100% {
+    	opacity: 1;
+    }
+}
+
+@keyframes canvi-animate-out {
+    0%   {
+    	opacity: 1;
+    }
+    100% {
+    	opacity: 0;
+    }
+}
