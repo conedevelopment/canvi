@@ -54,7 +54,7 @@ var canviRight = new Canvi({
 });
 ```
 
-## Accesibility
+## Accessibility
 
 Canvi using aria-hidden="true" when the navigation is hidden. If you want to be more accesible you can use the inert attribute - which is also used by Canvi - but for this you need to use [this polyfill](https://github.com/WICG/inert) because it is quite a new feature. Just simply insert the script into your project.
 
