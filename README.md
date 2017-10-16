@@ -8,7 +8,7 @@ Canvi is a simple off-canvas navigation with a few parameter to configure. You c
 
 To install Canvi get the JS and the CSS file and insert into your project. You can also customize the Sass to save some byte.
 
-```
+```html
 // To the head
 <link rel="stylesheet" href="canvi.css">
 // To the end of the body
@@ -19,7 +19,7 @@ To install Canvi get the JS and the CSS file and insert into your project. You c
 
 To use Canvi first, you have to implement the correct HTML structure which is mean the proper use of the .canvi-navbar and .canvi-content.
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head></head>
@@ -32,7 +32,7 @@ To use Canvi first, you have to implement the correct HTML structure which is me
 
 After this you need to call the Canvi constructor and viola you are done!
 
-```
+```js
 var canvi = new Canvi();
 ```
 
@@ -40,7 +40,7 @@ var canvi = new Canvi();
 
 To make multiple instances, you must specify the correct value for the content, navbar and openButton property. Note that the content can be the same on multiple initializations.
 
-```
+```js
 var canviLeft = new Canvi({
     content: '.js-canvi-content',
     navbar: '.js-canvi-navbar--left',
@@ -139,7 +139,7 @@ With this option, you can modify the width of the navbar by breakpoints. This is
 
 Canvi comes with a few method so you can open and close it manually from your code. To use these methods, you must save the Canvi instance in a variable at the declaration like to following:
 
-```
+```js
 var canviRight = new Canvi({
     content: '.js-canvi-content',
     navbar: '.js-canvi-navbar--right',
@@ -154,7 +154,7 @@ var canviRight = new Canvi({
 
 Open the Canvi instance.
 
-```
+```js
 canviRight.open();
 ```
 
@@ -162,7 +162,7 @@ canviRight.open();
 
 Close the Canvi instance.
 
-```
+```js
 canviRight.close();
 ```
 
@@ -170,7 +170,7 @@ canviRight.close();
 
 Toggle the Canvi instance.
 
-```
+```js
 canviRight.toggle();
 ```
 
@@ -184,7 +184,7 @@ Each event gives back three additional Canvi elements named by **navbar**, **ope
 
 This event is triggered when Canvi initialization ready. To catch the initialization event, you have to watch the canvi.init event. **Note that you must declare the following code before the Canvi constructor.**
 
-```
+```js
 document.querySelector('body').addEventListener('canvi.init', function(e) {
     console.log('Catch Canvi init event...');
 });
@@ -194,7 +194,7 @@ document.querySelector('body').addEventListener('canvi.init', function(e) {
 
 This event is triggered when you click on the menu open button. To catch the before-open event, you have to watch the canvi.before-open event.
 
-```
+```js
 document.querySelector('body').addEventListener('canvi.before-open', function(e) {
     console.log('Catch Canvi before-open event...');
 });
@@ -204,7 +204,7 @@ document.querySelector('body').addEventListener('canvi.before-open', function(e)
 
 This event is triggered after the menu opened. To catch the after-open event, you have to watch the canvi.after-open event.
 
-```
+```js
 document.querySelector('body').addEventListener('canvi.after-open', function(e) {
     console.log('Catch Canvi after-open event...');
 });
@@ -214,7 +214,7 @@ document.querySelector('body').addEventListener('canvi.after-open', function(e) 
 
 This event is triggered before you close the menu. To catch the before-close event, you have to watch the canvi.before-close event.
 
-```
+```js
 document.querySelector('body').addEventListener('canvi.before-close', function(e) {
     console.log('Catch Canvi before-close event...');
 });
@@ -224,7 +224,7 @@ document.querySelector('body').addEventListener('canvi.before-close', function(e
 
 This event is triggered after the menu closed. To catch the after-close event, you have to watch the canvi.after-close event.
 
-```
+```js
 document.querySelector('body').addEventListener('canvi.after-close', function(e) {
     console.log('Catch Canvi after-close event...');
 });
