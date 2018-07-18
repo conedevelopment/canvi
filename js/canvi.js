@@ -465,3 +465,5 @@ let Canvi = '';
         }
     }
 }());
+
+export default Canvi;
