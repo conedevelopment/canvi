@@ -266,3 +266,4 @@ class Canvi {
         console.groupEnd();
     }
 }
+export default Canvi;

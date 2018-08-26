@@ -1,0 +1,143 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>README.md</title>
+      </head>
+      <body>
+        <h1 id="canvi-a-simple-vanilla-javascript-off-canvas-navigation">Canvi - A simple vanilla JavaScript off-canvas navigation</h1>
+<p><a href="https://pineco.de/project/canvi-off-canvas-navigation/">Official page</a></p>
+<h2 id="introduction-installation">Introduction, installation</h2>
+<p>Canvi is a simple off-canvas navigation with a few parameter to configure. You can init multiple instances, set responsive width, use your style our Canvi&#39;s style.</p>
+<p>To install Canvi get the JS and the CSS file and insert into your project. You can also customize the Sass to save some byte.</p>
+<pre><code class="lang-html">// To the head
+&lt;link rel=&quot;stylesheet&quot; href=&quot;canvi.css&quot;&gt;
+// To the end of the body
+&lt;script src=&quot;canvi.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h2 id="basic-usage">Basic Usage</h2>
+<p>To use Canvi first, you have to implement the correct HTML structure which is mean the proper use of the .canvi-navbar and .canvi-content.</p>
+<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;canvi-navbar&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;canvi-content&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>After this you need to call the Canvi constructor and viola you are done!</p>
+<pre><code class="lang-js">var canvi = new Canvi();
+</code></pre>
+<h2 id="multiple-instance">Multiple Instance</h2>
+<p>To make multiple instances, you must specify the correct value for the content, navbar and openButton property. Note that the content can be the same on multiple initializations.</p>
+<pre><code class="lang-js">var canviLeft = new Canvi({
+    content: &#39;.js-canvi-content&#39;,
+    navbar: &#39;.js-canvi-navbar--left&#39;,
+    openButton: &#39;.js-canvi-open-button--left&#39;
+});
+
+var canviRight = new Canvi({
+    content: &#39;.js-canvi-content&#39;,
+    navbar: &#39;.js-canvi-navbar--right&#39;,
+    openButton: &#39;.js-canvi-open-button--right&#39;
+});
+</code></pre>
+<h2 id="accessibility">Accessibility</h2>
+<p>Canvi using aria-hidden=&quot;true&quot; when the navigation is hidden. If you want to be more accesible you can use the inert attribute - which is also used by Canvi - but for this you need to use <a href="https://github.com/WICG/inert">this polyfill</a> because it is quite a new feature. Just simply insert the script into your project.</p>
+<p>If you like to know more about inert check out <a href="https://youtu.be/fGLp_gfMMGU">A11ycats #2 episode</a>!</p>
+<h2 id="options">Options</h2>
+<h3 id="content">content</h3>
+<p><strong>Type:</strong> string</p>
+<p><strong>Default:</strong> &#39;.canvi-content&#39;</p>
+<p>This selector defines the content part of the markup. Mostly you need to modify this when you use multiple Canvi.</p>
+<h3 id="isdebug">isDebug</h3>
+<p><strong>Type:</strong> boolean</p>
+<p><strong>Default:</strong> false</p>
+<p>Canvi&#39;s debugger switch.</p>
+<h3 id="navbar">navbar</h3>
+<p><strong>Type:</strong> string</p>
+<p><strong>Default:</strong> &#39;.canvi-navbar&#39;</p>
+<p>Define the navbar part of the structure. This selector is part of the default markup. Mostly you need to modify it&#39;value when you use multiple Canvi.</p>
+<h3 id="speed">speed</h3>
+<p><strong>Type:</strong> string</p>
+<p><strong>Default:</strong> &#39;0.3s&#39;</p>
+<p>You can specify here the opening/closing speed of the menu.</p>
+<h3 id="openbutton">openButton</h3>
+<p><strong>Type:</strong> string</p>
+<p><strong>Default:</strong> &#39;.canvi-open-button&#39;</p>
+<p>Canvi open button selector.</p>
+<h3 id="position">position</h3>
+<p><strong>Type:</strong> string</p>
+<p><strong>Default:</strong> &#39;left&#39;</p>
+<p>Specify the position of the navigation.</p>
+<h3 id="pushcontent">pushContent</h3>
+<p><strong>Type:</strong> boolean</p>
+<p><strong>Default:</strong> true</p>
+<p>Set if you don&#39;t want the menu to push the content. In this case, it will lay over your page.</p>
+<h3 id="width">width</h3>
+<p><strong>Type:</strong> string</p>
+<p><strong>Default:</strong> &#39;300px&#39;</p>
+<p>Set the width of the navbar. You must give string with the correct unit so you can specify any value type like <strong>em</strong>, <strong>%</strong>, <strong>px</strong>.</p>
+<h3 id="responsivewidths">responsiveWidths</h3>
+<p><strong>Type:</strong> array</p>
+<p><strong>Default:</strong> []</p>
+<p>With this option, you can modify the width of the navbar by breakpoints. This is a mobile first approach, and the very first width option will be width parameter&#39;s value.</p>
+<h2 id="methods">Methods</h2>
+<p>Canvi comes with a few method so you can open and close it manually from your code. To use these methods, you must save the Canvi instance in a variable at the declaration like to following:</p>
+<pre><code class="lang-js">var canviRight = new Canvi({
+    content: &#39;.js-canvi-content&#39;,
+    navbar: &#39;.js-canvi-navbar--right&#39;,
+    openButton: &#39;.js-canvi-open-button--right&#39;,
+    position: &#39;right&#39;,
+    pushContent: true,
+    width: &#39;300px&#39;
+});
+</code></pre>
+<h3 id="open-">open()</h3>
+<p>Open the Canvi instance.</p>
+<pre><code class="lang-js">canviRight.open();
+</code></pre>
+<h3 id="close-">close()</h3>
+<p>Close the Canvi instance.</p>
+<pre><code class="lang-js">canviRight.close();
+</code></pre>
+<h3 id="toggle-">toggle()</h3>
+<p>Toggle the Canvi instance.</p>
+<pre><code class="lang-js">canviRight.toggle();
+</code></pre>
+<h2 id="events">Events</h2>
+<p>Canvi came with custom events which you can use to customize, modify Canvi or your site&#39;s specific parts. To catch an event all you have to do is to define an event listener to the body element.</p>
+<p>Each event gives back three additional Canvi elements named by <strong>navbar</strong>, <strong>openButton</strong>, <strong>content</strong>. You can access them through the event object like e.detail.navbar.</p>
+<h3 id="canvi-init">canvi.init</h3>
+<p>This event is triggered when Canvi initialization ready. To catch the initialization event, you have to watch the canvi.init event. <strong>Note that you must declare the following code before the Canvi constructor.</strong></p>
+<pre><code class="lang-js">document.querySelector(&#39;body&#39;).addEventListener(&#39;canvi.init&#39;, function(e) {
+    console.log(&#39;Catch Canvi init event...&#39;);
+});
+</code></pre>
+<h3 id="canvi-before-open">canvi.before-open</h3>
+<p>This event is triggered when you click on the menu open button. To catch the before-open event, you have to watch the canvi.before-open event.</p>
+<pre><code class="lang-js">document.querySelector(&#39;body&#39;).addEventListener(&#39;canvi.before-open&#39;, function(e) {
+    console.log(&#39;Catch Canvi before-open event...&#39;);
+});
+</code></pre>
+<h3 id="canvi-after-open">canvi.after-open</h3>
+<p>This event is triggered after the menu opened. To catch the after-open event, you have to watch the canvi.after-open event.</p>
+<pre><code class="lang-js">document.querySelector(&#39;body&#39;).addEventListener(&#39;canvi.after-open&#39;, function(e) {
+    console.log(&#39;Catch Canvi after-open event...&#39;);
+});
+</code></pre>
+<h3 id="canvi-before-close">canvi.before-close</h3>
+<p>This event is triggered before you close the menu. To catch the before-close event, you have to watch the canvi.before-close event.</p>
+<pre><code class="lang-js">document.querySelector(&#39;body&#39;).addEventListener(&#39;canvi.before-close&#39;, function(e) {
+    console.log(&#39;Catch Canvi before-close event...&#39;);
+});
+</code></pre>
+<h3 id="canvi-after-close">canvi.after-close</h3>
+<p>This event is triggered after the menu closed. To catch the after-close event, you have to watch the canvi.after-close event.</p>
+<pre><code class="lang-js">document.querySelector(&#39;body&#39;).addEventListener(&#39;canvi.after-close&#39;, function(e) {
+    console.log(&#39;Catch Canvi after-close event...&#39;);
+});
+</code></pre>
+
+      </body>
+    </html>

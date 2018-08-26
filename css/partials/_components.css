@@ -1,0 +1,142 @@
+.canvi-user-info {
+  padding: 25px 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  justify-cnt: left;
+  background: #333739;
+  margin-bottom: 20px;
+  position: relative; }
+  .canvi-user-info img {
+    max-width: 100%;
+    height: auto; }
+  .canvi-user-info__image {
+    margin-right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden; }
+  .canvi-user-info__data {
+    width: calc(100% - 70px); }
+  .canvi-user-info__title {
+    font-weight: 700;
+    color: #fff;
+    font-size: 18px;
+    margin: 0 0 3px 0;
+    line-height: 1.3em;
+    display: block; }
+  .canvi-user-info__meta {
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 14px; }
+    .canvi-user-info__meta:hover, .canvi-user-info__meta:focus, .canvi-user-info__meta:active {
+      color: rgba(255, 255, 255, 0.9); }
+  .canvi-user-info__close {
+    position: absolute;
+    top: calc(50% - 20px);
+    right: 30px;
+    background: rgba(0, 0, 0, 0.2);
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; }
+    .canvi-user-info__close:hover {
+      background: rgba(0, 0, 0, 0.6); }
+    .canvi-user-info__close::before {
+      content: '';
+      width: 20px;
+      height: 3px;
+      background: #fff;
+      position: absolute;
+      top: 18px;
+      left: 10px;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg); }
+    .canvi-user-info__close::after {
+      content: '';
+      width: 20px;
+      height: 3px;
+      background: #fff;
+      position: absolute;
+      top: 18px;
+      right: 10px;
+      -webkit-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      transform: rotate(-45deg); }
+
+.canvi-navigation {
+  margin: 0;
+  padding: 0; }
+  .canvi-navigation li {
+    list-style: none; }
+    .canvi-navigation li:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.03); }
+  .canvi-navigation__item {
+    display: block;
+    padding: 14px 30px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    opacity: 0.7;
+    text-decoration: none; }
+    .canvi-navigation__item.is-active, .canvi-navigation__item:hover {
+      opacity: 1; }
+  .canvi-navigation__icon-wrapper {
+    margin-right: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    background: #aaa;
+    color: #fff;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center; }
+  .canvi-navigation__icon {
+    font-size: 17px;
+    line-height: 1em; }
+  .canvi-navigation__text {
+    font-weight: 700;
+    color: #94a0a8;
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.3em;
+    display: block;
+    text-transform: uppercase; }
+
+.canvi-header {
+  background: #1ce678;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+  .canvi-header__image {
+    margin: 30px;
+    max-width: 100px;
+    height: auto; }
