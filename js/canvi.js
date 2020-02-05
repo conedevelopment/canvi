@@ -1,5 +1,6 @@
 class Canvi {
-    constructor(options = {}) {
+    constructor(options = {})
+    {
         this.options = Object.assign({
             speed: '0.3s',
             width: '300px',
@@ -18,10 +19,19 @@ class Canvi {
         this.content = document.querySelector(this.options.content);
         this.openButton = document.querySelector(this.options.openButton);
 
+        this.listeners = {
+            open: () => this.open(),
+            close: () => this.close(),
+            responsiveWidth: () => this._responsiveWidth(),
+            transitionOpenEnd: event => this._transitionOpenEnd(event),
+            transitionCloseEnd: event => this._transitionCloseEnd(event),
+        };
+
         this.init();
     }
 
-    init() {
+    init()
+    {
         if (this.options.isDebug) {
             console.log('%c %s', 'color: #e01a51; font-style: italic;', 'CANVI: Init is running...');
             this._objectLog();
@@ -35,7 +45,8 @@ class Canvi {
         this.navbar.setAttribute('aria-hidden', 'true');
     }
 
-    open() {
+    open()
+    {
         if (this.isOpen) {
             return;
         }
@@ -55,7 +66,7 @@ class Canvi {
         this._responsiveWidth();
 
         (this.options.pushContent ? this.content : this.navbar)
-            .addEventListener(this.transitionEvent, event => this._transtionOpenEnd(event));
+            .addEventListener(this.transitionEvent, this.listeners.transitionOpenEnd);
 
         this.navbar.removeAttribute('inert');
         this.navbar.removeAttribute('aria-hidden');
@@ -63,7 +74,8 @@ class Canvi {
         this.isOpen = true;
     }
 
-    close() {
+    close()
+    {
         if (! this.isOpen) {
             return;
         }
@@ -80,7 +92,7 @@ class Canvi {
         this.navbar.classList.remove('is-canvi-open');
 
         (this.options.pushContent ? this.content : this.navbar)
-            .addEventListener(this.transitionEvent, event => this._transitionCloseEnd(event));
+            .addEventListener(this.transitionEvent, this.listeners.transitionCloseEnd);
 
         this.navbar.setAttribute('inert', '');
         this.navbar.setAttribute('aria-hidden', 'true');
@@ -88,7 +100,8 @@ class Canvi {
         this.isOpen = false;
     }
 
-    toggle() {
+    toggle()
+    {
         if (this.options.isDebug) {
             console.log('%c %s', 'color: #e01a51; font-style: italic;', 'CANVI: Toggle is running...');
         }
@@ -96,7 +109,8 @@ class Canvi {
         this.isOpen ? this.close() : this.open();
     }
 
-    _buildMarkup() {
+    _buildMarkup()
+    {
         if (this.options.isDebug) {
             console.log('%c %s', 'color: #ccc; font-style: italic;', 'CANVI: Build markup...');
         }
@@ -110,7 +124,8 @@ class Canvi {
         this.body.classList.add('is-canvi-ready');
     }
 
-    _responsiveWidth() {
+    _responsiveWidth()
+    {
         if (this.navbar.classList.contains('is-canvi-open') && window.matchMedia('(min-width: 0px)').matches) {
             this.navbar.style.width = this.options.width;
             this._responsiveWidthHelper(this.options.width);
@@ -126,7 +141,8 @@ class Canvi {
         }
     }
 
-    _responsiveWidthHelper(width) {
+    _responsiveWidthHelper(width)
+    {
         if (this.options.pushContent) {
             this.content.style.transform = this.options.position === 'left'
                 ? `translateX(${width})`
@@ -134,54 +150,57 @@ class Canvi {
         }
     }
 
-    _buildOverlay() {
+    _buildOverlay()
+    {
         if (this.options.isDebug) {
             console.log('%c %s', 'color: #32da94; font-style: italic;', 'CANVI: Build overlay...');
         }
 
         if (! this.content.querySelector('.canvi-overlay')) {
-            console.log('create canvi overlay');
             this.overlay = document.createElement('div');
             this.overlay.className = 'canvi-overlay';
             this.content.appendChild(this.overlay);
         }
 
-        this.overlay.addEventListener('click', () => this.close());
+        this.overlay.addEventListener('click', this.listeners.close);
 
         this._setTransitionSpeed();
     }
 
-    _removeOverlay() {
+    _removeOverlay()
+    {
         if (this.options.isDebug) {
             console.log('%c %s', 'color: #32da94; font-style: italic;', 'CANVI: Remove overlay...');
         }
 
         if (this.overlay) {
             this.content.removeChild(this.overlay);
-            this.overlay.removeEventListener('click', () => this.open());
+            this.overlay.removeEventListener('click', this.listeners.close);
         }
     }
 
-    _initializeMainEvents() {
+    _initializeMainEvents()
+    {
         if (this.options.isDebug) {
             console.log('%c %s', 'color: #ccc; font-style: italic;', 'CANVI: Init main events...');
             console.log('%c %s', 'color: #999; font-style: italic;', '---------');
         }
 
-        this.body.addEventListener('keyup', e => {
-            if (this.isOpen && e.keyCode == 27) {
+        this.body.addEventListener('keyup', event => {
+            if (this.isOpen && event.keyCode == 27) {
                 this.close();
             }
         });
 
         if (this.openButton) {
-            this.openButton.addEventListener('click', () => this.open());
+            this.openButton.addEventListener('click', this.listeners.open);
         }
 
-        window.addEventListener('resize', () => this._responsiveWidth());
+        window.addEventListener('resize', this.listeners.responsiveWidth);
     }
 
-    _transtionOpenEnd(event) {
+    _transitionOpenEnd(event)
+    {
         if (! this.isOpen || event.propertyName !== 'transform') {
             return;
         }
@@ -194,11 +213,12 @@ class Canvi {
         this._triggerCanviEvent('canvi.after-open');
 
         (this.options.pushContent ? this.content : this.navbar)
-            .removeEventListener(this.transitionEvent, event => this._transtionOpenEnd(event));
+            .removeEventListener(this.transitionEvent, this.listeners.transitionOpenEnd);
     }
 
-    _transitionCloseEnd(event) {
-        if (this.isOpen || event.propertyName !== 'transform') {
+    _transitionCloseEnd(event)
+    {
+        if (this.isOpen || event.propertyName !== 'transform') {
             return;
         }
 
@@ -211,28 +231,32 @@ class Canvi {
         this._resetZindex();
 
         (this.options.pushContent ? this.content : this.navbar)
-            .removeEventListener(this.transitionEvent, event => this._transitionCloseEnd(event));
+            .removeEventListener(this.transitionEvent, this.listeners.transitionCloseEnd);
 
         this.content.classList.remove('is-canvi-open');
     }
 
-    _setTransitionSpeed() {
+    _setTransitionSpeed()
+    {
         this.navbar.style.transitionDuration = this.options.speed;
         this.content.style.transitionDuration = this.options.speed;
         this.overlay.style.animationDuration = this.options.speed;
     }
 
-    _setZindex() {
+    _setZindex()
+    {
         this.navbar.style.zIndex = this.options.pushContent ? 20 : 10;
         this.content.style.zIndex = this.options.pushContent ? 40 : 5;
     }
 
-    _resetZindex() {
+    _resetZindex()
+    {
         this.navbar.style.zIndex = 1;
         this.content.style.zIndex = 5;
     }
 
-    _whichTransitionEvent() {
+    _whichTransitionEvent()
+    {
         let el = document.createElement('fakeelement'),
             transitions = {
                 'transition': 'transitionend',
@@ -248,7 +272,8 @@ class Canvi {
         }
     }
 
-    _triggerCanviEvent(name) {
+    _triggerCanviEvent(name)
+    {
         this.body.dispatchEvent(new CustomEvent(name, {
             details: {
                 navbar: this.navbar,
@@ -258,7 +283,8 @@ class Canvi {
         }));
     }
 
-    _objectLog() {
+    _objectLog()
+    {
         console.groupCollapsed('Canvi Object');
         console.log('Open Button: ', this.openButton);
         console.log('Navbar: ', this.navbar);
